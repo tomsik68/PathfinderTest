@@ -2,17 +2,15 @@ package sk.tomsik68.pftest;
 
 import java.util.List;
 
-import org.bukkit.Material;
 import org.bukkit.ai.Pathfinder;
 import org.bukkit.ai.PathfinderType;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.PathfindingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 
 public class ExamplePathfinder implements Pathfinder {
-    private LivingEntity entity;
+    private PathfindingEntity entity;
     private Player player;
     @Override
     public boolean canStart() {
@@ -26,10 +24,6 @@ public class ExamplePathfinder implements Pathfinder {
         return false;
     }
 
-    @Override
-    public LivingEntity getEntity() {
-        return entity;
-    }
 
     @Override
     public int getPriority() {
@@ -38,13 +32,9 @@ public class ExamplePathfinder implements Pathfinder {
 
     @Override
     public PathfinderType getType() {
-        return PathfinderType.Goal;
+        return PathfinderType.GOAL;
     }
 
-    @Override
-    public void setEntity(LivingEntity arg0) {
-        entity = arg0;
-    }
     @Override
     public void update() {
         if(entity.getNearbyEntities(5, 5, 5).isEmpty())
@@ -66,6 +56,16 @@ public class ExamplePathfinder implements Pathfinder {
     @Override
     public void onStop() {
         
+    }
+
+    @Override
+    public PathfindingEntity getEntity() {
+        return entity;
+    }
+
+    @Override
+    public void setEntity(PathfindingEntity arg0) {
+        this.entity = arg0;
     }
 
 }
